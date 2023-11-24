@@ -141,11 +141,29 @@ public class Main {
         return appsBought;
     }
 
+
+    //PLEASE NOTE THAT THIS IS CORRECTED VERSION OF CODE, at first it was a lot of bugs, now when I updated
+    // it, for 1000 dollars it shows only two apps because both of them are 400 USD, and for 10k also
+    //the most expensive ones first, if I remember you said on class that this was okay, but maybe I'm wrong
+    //I will provide another function that was there at first
+    private static Map<String, Double> SortByPriceDescending(Map<String, Double> appPrices) {
+        List<Map.Entry<String, Double>> sortedEntries = new ArrayList<>(appPrices.entrySet());
+
+        sortedEntries.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+
+        Map<String, Double> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<String, Double> entry : sortedEntries) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+
+        return sortedMap;
+    }
+    /*
     private static Map<String, Double> SortByPriceDescending(Map<String, Double> appPrices) {
         Map<String, Double> sortedPrices = new HashMap<>(appPrices);
         sortedPrices.entrySet().stream().sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
         return sortedPrices;
-    }
+    }*/
 
     private static void SaveToReport4(List<String> appsBought) throws IOException {
         try(FileWriter fw = new FileWriter("Report 4.0 task.csv")) {
